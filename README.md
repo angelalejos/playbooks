@@ -32,7 +32,7 @@ edit /etc/sshd/config
 ```
 
 ```
-service sshd start
+service sshd restart
 ```
 
 Run the playbook:
