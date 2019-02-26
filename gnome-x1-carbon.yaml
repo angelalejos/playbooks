@@ -19,7 +19,7 @@
  
     - name: Enable NVidia support in /etc/rc.conf
       shell: |
-        sysrc kld_list="/boot/modules/i915kms.ko"
+        sysrc kld_list="/boot/modules/i915kms.ko if_iwm cuse"
  
     - name: Restart kld service to load NVidia kernel module  
       service: name=kld state=restarted
@@ -41,5 +41,7 @@
           enabled: true
           state: started
       with_items:
+         - cupsd
          - dbus
          - gdm
+         - webcamd
