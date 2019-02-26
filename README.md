@@ -40,7 +40,7 @@ Run the playbook:
 ansible-playbook plasma-workstation.yaml
 ```
 
-## Local deployment
+## Local deployment as root without ssh
 
 Install ansible:
 
