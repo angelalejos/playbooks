@@ -12,7 +12,7 @@ pkg install py36-ansible
 Add hosts:
 
 ```
-edit /usr/local//etc/ansible/hosts
+edit /usr/local/etc/ansible/hosts
 ```
 
 Install ssh-pass to prompt for password:
