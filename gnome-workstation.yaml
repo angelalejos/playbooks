@@ -14,7 +14,7 @@
  
     - name: Install packages for workstation role on FreeBSD
       pkgng:
-          name: xorg, gnome3, firefox, thunderbird, libreoffice, nvidia-driver
+          name: xorg, gnome3, firefox, thunderbird, libreoffice, xdg-desktop-dirs, nvidia-driver
           state: present
  
     - name: Enable NVidia support in /etc/rc.conf
