@@ -1,0 +1,27 @@
+- hosts: all
+  user: "root"
+  vars:
+          ansible_ssh_port: 22
+          ansible_python_interpreter: "/usr/local/bin/python3.6"
+          ansible_port: 22
+  tasks:
+    - name: Enable cuse support in /etc/rc.conf
+      shell: |
+        sysrc kld_list+=" cuse.ko"
+ 
+    - name: Restart kld service to load cuse kernel module  
+      service: name=kld state=restarted 
+
+    - name: Install packages for webcam on FreeBSD
+      pkgng:
+          name: webcamd
+          state: present
+ 
+    - name: Add users to webcamd group
+      shell: |
+        pw groupmod webcamd -m jmaloney
+ 
+    - name: Enable and start webcamd service  
+      service: name=webcamd state=restarted
+
+

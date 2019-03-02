@@ -1,0 +1,30 @@
+- hosts: all
+  user: "root"
+  vars:
+          ansible_ssh_port: 22
+          ansible_python_interpreter: "/usr/local/bin/python3.6"
+          ansible_port: 22
+  tasks:
+    - name: Install packages for intel GPU on FreeBSD
+      pkgng:
+          name: drm-kmod 
+          state: present
+ 
+    - name: Enable drm-kmod support in /etc/rc.conf
+      shell: |
+        sysrc kld_list+=" /boot/modules/i915kms.ko"
+ 
+    - name: Restart kld service to load i915kms kernel module  
+      service: name=kld state=restarted
+ 
+    - name: Configure /usr/local/etc/X11/xorg.conf.d/driver-intel.conf
+      lineinfile:
+          line: "{{ item }}"
+          path: /usr/local/etc/X11/xorg.conf.d/driver-intel.conf
+          create: yes
+      with_items:
+         - 'Section "Device"'
+         - '    Identifier "Card0"'
+         - '    Driver     "intel"'
+         - 'EndSection'
+

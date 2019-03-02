@@ -1,0 +1,20 @@
+- hosts: all
+  user: "root"
+  vars:
+          ansible_ssh_port: 22
+          ansible_python_interpreter: "/usr/local/bin/python3.6"
+          ansible_port: 22
+  tasks:
+    - name: Install packages for Mate on FreeBSD
+      pkgng:
+          name: xorg, mate, lightdm-gtk-greeter
+          state: present
+ 
+    - name: Enable and start all services for Mate on FreeBSD
+      service:
+          name: "{{ item }}"
+          enabled: true
+          state: started
+      with_items:
+         - dbus
+         - lightdm

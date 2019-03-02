@@ -12,14 +12,14 @@
     - name: Restart abi service to load Linux kernel module
       service: name=abi state=restarted
  
-    - name: Install packages for workstation role on FreeBSD
+    - name: Install packages for nvidia-driver on FreeBSD
       pkgng:
-          name: xorg, kde5, sddm, firefox, thunderbird, libreoffice, nvidia-driver
+          name: nvidia-driver
           state: present
  
     - name: Enable NVidia support in /etc/rc.conf
       shell: |
-        sysrc kld_list="nvidia-modeset"
+        sysrc kld_list+=" nvidia-modeset"
  
     - name: Restart kld service to load NVidia kernel module  
       service: name=kld state=restarted
@@ -34,12 +34,4 @@
          - '    Identifier "Card0"'
          - '    Driver     "nvidia"'
          - 'EndSection'
- 
-    - name: Enable and start all services for workstation role on FreeBSD
-      service:
-          name: "{{ item }}"
-          enabled: true
-          state: started
-      with_items:
-         - dbus
-         - sddm
+
