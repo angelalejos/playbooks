@@ -37,7 +37,7 @@ service sshd restart
 
 Run the playbook:
 ```
-ansible-playbook plasma-workstation.yaml
+ansible-playbook 01-drivers-intel-gpu.yaml
 ```
 
 ## Local deployment as root without ssh
@@ -50,6 +50,6 @@ pkg install py36-ansible
 
 Run the playbook:
 ```
-ansible-playbook plasma-workstation.yaml --connection=local
+ansible-playbook 01-drivers-intel-gpu.yaml --connection=local
 ```
 
