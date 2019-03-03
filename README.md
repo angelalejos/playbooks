@@ -1,9 +1,9 @@
 # playbooks
 Random ansible playbooks
 
-## Remote deployment as root without ssh-key
+## Ansible host configuration
 
-Install ansible:
+Install ansible on the host:
 
 ```
 pkg install py36-ansible
@@ -27,6 +27,14 @@ Install ssh-pass to prompt for password:
 pkg install sshpass
 ```
 
+## Client configuration
+
+Install ansible on the client:
+
+```
+pkg install py36-ansible
+```
+
 Ensure sshd is enabled, configured the client for PermitRootLogin and restart sshd:
 
 ```
@@ -41,12 +49,12 @@ edit /etc/sshd/config
 service sshd restart
 ```
 
-Run the playbook:
+Run the playbook using remote deployment as root without ssh-key:
 ```
 ansible-playbook-3.6 01-drivers-intel-gpu.yaml --ask-pass
 ```
 
-## Local deployment as root without ssh
+## Local deployment without ansible host
 
 Install ansible:
 
