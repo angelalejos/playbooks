@@ -1,0 +1,23 @@
+- hosts: all
+  user: "root"
+  vars:
+          ansible_ssh_port: 22
+          ansible_python_interpreter: "/usr/local/bin/python3.6"
+          ansible_port: 22
+  tasks:
+    - name: Install packages for VirtualBox on FreeBSD
+      pkgng:
+          name: virtualbox-ose
+          state: present
+ 
+    - name: Add users to vboxusers group
+      shell: |
+        grep -E 1[0-9]{3}  /etc/passwd | sed s/:/\ / | awk '{print $1}' | xargs pw groupmod vboxusers -m
+
+    - name: Enable and start all services for vbox on FreeBSD
+      service:
+          name: "{{ item }}"
+          enabled: true
+          state: started
+      with_items:
+         - vboxnet

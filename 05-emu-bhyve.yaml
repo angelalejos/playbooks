@@ -1,0 +1,29 @@
+- hosts: all
+  user: "root"
+  vars:
+          ansible_ssh_port: 22
+          ansible_python_interpreter: "/usr/local/bin/python3.6"
+          ansible_port: 22
+  tasks:
+    - name: Install packages for vm-bhyve on FreeBSD
+      pkgng:
+          name: vm-bhyve, bhyve-firmware, grub2-bhyve
+          state: present
+
+    - name: Set /usr/vms path as for vm-bhyve              
+      shell: |
+        if [ ! -d /usr/vms ] ; then mkdir /usr/vms ; fi
+        sysrc vm_dir="/usr/vms"
+
+    - name: Enable and start all services for vm-bhyve on FreeBSD
+      service:
+          name: "{{ item }}"
+          enabled: true
+          state: started
+      with_items:
+         - vm
+
+    - name: Create public switch for VMs
+      shell: |
+        vm switch create public
+      ignore_errors: True
