@@ -9,11 +9,17 @@ Install ansible:
 pkg install py36-ansible
 ```
 
+Make directory for configuration if it does not exist:
+
+```
+mkdir /usr/local/etc/ansible/
+```
+
 Add hosts:
 
 ```
 edit /usr/local/etc/ansible/hosts
-```gpu.yaml
+```
 
 Install ssh-pass to prompt for password:
 
