@@ -23,6 +23,7 @@
  
     - name: Restart kld service to load NVidia kernel module  
       service: name=kld state=restarted
+      ignore_errors: True
  
     - name: Configure /usr/local/etc/X11/xorg.conf.d/driver-nvidia.conf
       lineinfile:
