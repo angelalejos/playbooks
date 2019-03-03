@@ -16,3 +16,4 @@
  
     - name: Restart kld service to load i915kms kernel module  
       service: name=kld state=restarted
+      ignore_errors: True
