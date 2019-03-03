@@ -12,5 +12,3 @@
  
     - name: Enable and start cups service  
       service: name=cupsd state=restarted
-
-
