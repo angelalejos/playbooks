@@ -21,6 +21,11 @@
     - name: Add users to webcamd group
       shell: |
         grep -E 1[0-9]{3}  /etc/passwd | sed s/:/\ / | awk '{print $1}' | xargs pw groupmod webcamd -m
- 
-    - name: Enable and start webcamd service  
-      service: name=webcamd state=restarted
+
+    - name: Enable and start all services for webcam on FreeBSD
+      service:
+          name: "{{ item }}"
+          enabled: true
+          state: started
+      with_items:
+         - webcamd 
