@@ -21,13 +21,13 @@ Add hosts:
 edit /usr/local/etc/ansible/hosts
 ```
 
-Install ssh-pass to prompt for password:
+Install ssh-pass for password prompt support later on:
 
 ```
 pkg install sshpass
 ```
 
-## Client configuration
+## Client configurationto
 
 Install ansible on the client:
 
