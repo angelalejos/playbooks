@@ -18,7 +18,7 @@ edit /usr/local/etc/ansible/hosts
 Install ssh-pass to prompt for password:
 
 ```
-pkg install ssh-pass
+pkg install sshpass
 ```
 
 Ensure sshd is enabled, configured the client for PermitRootLogin and restart sshd:
