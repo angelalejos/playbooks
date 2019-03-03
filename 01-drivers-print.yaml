@@ -10,5 +10,10 @@
           name: cups
           state: present
  
-    - name: Enable and start cups service  
-      service: name=cupsd state=restarted
+    - name: Enable and start all services for cups on FreeBSD
+      service:
+          name: "{{ item }}"
+          enabled: true
+          state: started
+      with_items:
+         - cupsd 
