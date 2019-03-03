@@ -1,0 +1,23 @@
+- hosts: all
+  user: "root"
+  vars:
+          ansible_ssh_port: 22
+          ansible_python_interpreter: "/usr/local/bin/python3.6"
+          ansible_port: 22
+  tasks:
+    - name: Replace kernel boot with splash screen 
+      shell: |
+        sysrc -f /boot/loader.conf boot_mute="YES"
+
+    - name: Disable beastie menu 
+      shell: |
+        sysrc -f /boot/loader.conf beastie_disable="YES"
+
+    - name: Shorten autoboot delay 
+      shell: |
+        sysrc -f /boot/loader.conf autoboot_delay="02" 
+
+    - name: Disable console beep
+      shell: |
+        sysrc allscreens_kbdflags="-b quiet.off"
+        kbdcontrol -b quiet.off
