@@ -22,6 +22,12 @@
       shell: |
         grep -E 1[0-9]{3}  /etc/passwd | sed s/:/\ / | awk '{print $1}' | xargs pw groupmod webcamd -m
 
+    - name: Enable active webcams
+      shell: |
+        sysrc webcamd_enable="YES"
+        usbconfig | grep Cam | awk '{print $1}' | cut -d : -f 1 | xargs service webcamd restart
+        usbconfig | grep Vid | awk '{print $1}' | cut -d : -f 1 | xargs service webcamd restart
+
     - name: Enable and start all services for webcam on FreeBSD
       service:
           name: "{{ item }}"
