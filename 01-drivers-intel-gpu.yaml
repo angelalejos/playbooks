@@ -17,3 +17,7 @@
     - name: Restart kld service to load i915kms kernel module  
       service: name=kld state=restarted
       ignore_errors: True
+
+    - name: Add users to video group
+      shell: |
+        grep -E 1[0-9]{3}  /etc/passwd | sed s/:/\ / | awk '{print $1}' | xargs pw groupmod video -m
