@@ -19,7 +19,7 @@
  
     - name: Add users to webcamd group
       shell: |
-        pw groupmod webcamd -m jmaloney
+        grep -E 1[0-9]{3}  /etc/passwd | sed s/:/\ / | awk '{print $1}' | xargs pw groupmod webcamd -m
  
     - name: Enable and start webcamd service  
       service: name=webcamd state=restarted
