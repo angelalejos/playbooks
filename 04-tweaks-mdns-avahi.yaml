@@ -5,24 +5,20 @@
           ansible_python_interpreter: "/usr/local/bin/python3.6"
           ansible_port: 22
   tasks:
-    - name: Install packages for mDNS on FreeBSD
+    - name: Install packages for avahi on FreeBSD
       pkgng:
-          name: mDNSResponder, mDNSResponder_nss
+          name: avahi, nss_mdns
           state: present
 
     - name:  Enable mDNS for nsswitch to allow host name resolution
       shell: |
         if ! grep -q 'mdns' /etc/nsswitch.conf ; then sed -i '' "s|dns|dns mdns|g" /etc/nsswitch.conf ;fi
 
-    - name:  Configure mdnsresponder_posix flags to advertise the workstation service
-      shell: |
-        sysrc mdnsresponderposix_flags="-n workstation"
-
-    - name: Enable and start all services for mDNS on FreeBSD
+    - name: Enable and start all services for avahi on FreeBSD
       service:
           name: "{{ item }}"
           enabled: true
           state: started
       with_items:
-         - mdnsd
-         - mdnsresponderposix
+         - avahi-daemon 
+         - avahi-dnsconfd
