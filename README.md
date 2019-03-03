@@ -27,7 +27,7 @@ Install ssh-pass for password prompt support later on:
 pkg install sshpass
 ```
 
-## Client configurationto
+## Client configuration
 
 Install ansible on the client:
 
