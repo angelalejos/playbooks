@@ -43,7 +43,7 @@ service sshd restart
 
 Run the playbook:
 ```
-ansible-playbook-3.6 01-drivers-intel-gpu.yaml
+ansible-playbook-3.6 01-drivers-intel-gpu.yaml --ask-pass
 ```
 
 ## Local deployment as root without ssh
