@@ -12,7 +12,7 @@
 
     - name:  Enable mDNS for nsswitch to allow host name resolution
       shell: |
-        if grep -q '^mdns' /etc/nsswitch.conf ; then sed -i '' "s|dns|dns mdns|g" /etc/nsswitch.conf ;fi
+        if ! grep -q '^mdns' /etc/nsswitch.conf ; then sed -i '' "s|dns|dns mdns|g" /etc/nsswitch.conf ;fi
 
     - name:  Configure mdnsresponder_posix flags to advertise the workstation service
       shell: |
