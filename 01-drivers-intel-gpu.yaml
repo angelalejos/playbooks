@@ -16,15 +16,3 @@
  
     - name: Restart kld service to load i915kms kernel module  
       service: name=kld state=restarted
- 
-    - name: Configure /usr/local/etc/X11/xorg.conf.d/driver-intel.conf
-      lineinfile:
-          line: "{{ item }}"
-          path: /usr/local/etc/X11/xorg.conf.d/driver-intel.conf
-          create: yes
-      with_items:
-         - 'Section "Device"'
-         - '    Identifier "Card0"'
-         - '    Driver     "intel"'
-         - 'EndSection'
-
