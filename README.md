@@ -49,9 +49,15 @@ edit /etc/sshd/config
 service sshd restart
 ```
 
+Clone this repo on server:
+
+```
+git clone https://github.com/iXsystems/playbooks/
+```
+
 Run the playbook using remote deployment as root without ssh-key:
 ```
-ansible-playbook-3.6 01-drivers-intel-gpu.yaml --ask-pass
+ansible-playbook-3.6 playbooks/01-drivers-intel-gpu.yaml --ask-pass
 ```
 
 ## Local deployment without ansible host
@@ -62,8 +68,14 @@ Install ansible:
 pkg install py36-ansible
 ```
 
+Clone this repo on client:
+
+```
+git clone https://github.com/iXsystems/playbooks/
+```
+
 Run the playbook:
 ```
-ansible-playbook-3.6 01-drivers-intel-gpu.yaml --connection=local
+ansible-playbook-3.6 playbooks/01-drivers-intel-gpu.yaml --connection=local
 ```
 
