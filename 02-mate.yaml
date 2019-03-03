@@ -9,6 +9,23 @@
       pkgng:
           name: xorg, mate, lightdm-gtk-greeter
           state: present
+
+    - name:  Increase shared memory limit to prevent lightdm crash per pkg-message
+      shell: |
+        sed -i '' -e 's/memorylocked=128M/memorylocked=256M/' /etc/login.conf
+        cap_mkdb /etc/login.conf
+
+    - name:  Updating Ports
+      shell: |
+        portsnap fetch extract
+
+    - name:  Uninstalling LightDM before building the latest from ports
+      shell: |
+        cd /usr/ports/x11/lightdm && make deinstall
+
+    - name:  Building and installing the latest LightDM from ports
+      shell: |
+        cd /usr/ports/x11/lightdm && make -DBATCH install clean
  
     - name: Enable and start all services for Mate on FreeBSD
       service:

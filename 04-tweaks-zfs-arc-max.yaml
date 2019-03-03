@@ -1,0 +1,10 @@
+- hosts: all
+  user: "root"
+  vars:
+          ansible_ssh_port: 22
+          ansible_python_interpreter: "/usr/local/bin/python3.6"
+          ansible_port: 22
+  tasks:
+    - name: Set ARC max to reasonable value for 99% of workstations and laptops
+      shell: |
+        if ! grep -q '^vfs.zfs.arc_max' /boot/loader.conf ; then echo 'vfs.zfs.arc_max="1024M"' >> /boot/loader.conf ; fi
